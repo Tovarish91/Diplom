@@ -1,0 +1,88 @@
+﻿<Window x:Class="Diplom1.Windows.winShureBlock"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom1.Windows"
+        mc:Ignorable="d"
+        Title="winShureBlock" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Height="260" Width="640">
+    <Window.Background>
+        <SolidColorBrush Color="#FFFF9800"></SolidColorBrush>
+    </Window.Background>
+    <Grid>
+
+        <!--Надписи-->
+        <StackPanel
+               HorizontalAlignment="Center"
+               VerticalAlignment="Top">
+            <Label Content="Вы уверены?" 
+               FontSize="36"
+                   HorizontalAlignment="Center"></Label>
+            
+            <Label Content="Необходимо указать причину:" 
+               FontSize="36"
+                   HorizontalAlignment="Center"></Label>
+
+            <Border
+                Background="#FFD772" 
+                CornerRadius="25"
+                Width="500"
+                HorizontalAlignment="Center"
+                Height ="50"
+                Margin="0 20 0 0">
+                <TextBox x:Name="tboxWhy"
+                     VerticalAlignment="Center"
+                     FontSize="24"
+                     GotFocus="RemoveText" 
+                     LostFocus="AddText"
+                     Text="Причина"
+                     Tag="Причина"
+                     Margin="20 0 20 0"
+                     Background="#FFD772"
+                     BorderThickness="0"/>
+            </Border>
+        </StackPanel>
+        
+
+        <!--Назад-->
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnBack"
+                Content="Отмена"
+                FontSize="24"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Width="100"
+                Height ="50" Click="btnBack_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="25"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <!--вперёд-->
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnNext"
+                Content="Да"
+                FontSize="24"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Right"
+                Width="100"
+                Height ="50" Click="btnNext_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="25"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>

@@ -1,0 +1,145 @@
+﻿<Window x:Class="Diplom1.Windows.winNo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Diplom1.Windows"
+        mc:Ignorable="d"
+        WindowState="Maximized"
+        Title="winNo" 
+        WindowStyle="None"
+        Height="1080" Width="1920">
+    <Window.Background>
+        <ImageBrush ImageSource="Images\No.jpg"/>
+    </Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <!--Назад-->
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnBack"
+                Content="Назад"
+                FontSize="24"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                Width="100"
+                Height ="50" Click="btnBack_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="25"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <!--Аватар-->
+        <Ellipse Height="350"
+                 Width="350"
+                 Grid.RowSpan="2"
+                 VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                 Grid.Column="1">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="Images\ava.jpeg"
+                            Stretch="UniformToFill">
+                </ImageBrush>
+            </Ellipse.Fill>
+        </Ellipse>
+
+        <!--ФИО-->
+        <Label Name="lb_FIO"
+               Grid.Row="1"
+               VerticalAlignment="Bottom"
+               HorizontalAlignment="Center"
+               Content="Леонид Львович Остовский"
+               FontSize="36" 
+               Grid.Column="1"/>
+
+        <!--Данные-->
+        <StackPanel Grid.Row="2"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="50,0,0,0">
+            <Label Name="lb_Ord"
+                   Content="Заказов: 8"
+                   FontSize="36"/>
+            <Label Name="lb_Sum"
+                   Content="Общая сумма: 15'390"
+                   FontSize="36"
+                   Margin="0 20 0 20"/>
+            <Label Name="lb_Dec"
+                   Content="Отклонённых запросов: 0"
+                   FontSize="36"/>
+        </StackPanel>
+
+        <!--Кнопки-->
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnBlock"
+                Content="Блокировать"
+                FontSize="36"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                Width="250"
+                Height ="70"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Grid.Row="3" Click="btnBlock_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnCom"
+                Content="Связаться"
+                FontSize="36"
+                Grid.Row="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                Width="250"
+                Height ="70" 
+                Grid.Column="1" Click="btnCom_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Template="{DynamicResource ButtonTemplate1}" 
+                x:Name="btnNext"
+                Content="Продолжить"
+                FontSize="36"
+                Grid.Row="3"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Center"
+                Background="#FFC229"
+                BorderBrush="#FFC229"
+                Width="250"
+                Height ="70" 
+                Grid.Column="2" Click="btnNext_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                        Value="30"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Window>
