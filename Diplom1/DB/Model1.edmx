@@ -50,7 +50,6 @@
           <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="Unreliable" Type="bit" Nullable="false" />
-          <Property Name="Avatar" Type="varbinary(max)" />
           <Property Name="WhyUnr" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Department">
@@ -84,7 +83,7 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDEmployee" Type="int" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
-          <Property Name="Text" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="IsDone" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Gender">
@@ -450,25 +449,6 @@
           <NavigationProperty Name="Tag" Relationship="Self.FK__Applicati__IDTag__5FB337D6" FromRole="ApplicationTag" ToRole="Tag" />
           <NavigationProperty Name="Application" Relationship="TechnicalSupportSDModel.FK__Applicati__IDApp__5EBF139D" FromRole="ApplicationTag" ToRole="Application" />
         </EntityType>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDGender" Type="Int32" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Patronimic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Unreliable" Type="Boolean" Nullable="false" />
-          <Property Name="Avatar" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <NavigationProperty Name="Gender" Relationship="Self.FK__Client__IDGender__4BAC3F29" FromRole="Client" ToRole="Gender" />
-          <NavigationProperty Name="Order" Relationship="TechnicalSupportSDModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
-          <NavigationProperty Name="Application" Relationship="TechnicalSupportSDModel.FK__Applicati__IDCli__5070F446" FromRole="Client" ToRole="Application" />
-          <Property Name="WhyUnr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="ID" />
@@ -508,8 +488,8 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="Self.FK__Client__IDGender__4BAC3F29" FromRole="Gender" ToRole="Client" />
           <NavigationProperty Name="Employee" Relationship="Self.FK__Employee__IDGend__4316F928" FromRole="Gender" ToRole="Employee" />
+          <NavigationProperty Name="Client" Relationship="TechnicalSupportSDModel.FK__Client__IDGender__4BAC3F29" FromRole="Gender" ToRole="Client" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
@@ -587,18 +567,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Client__IDGender__4BAC3F29">
-          <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
-          <End Role="Client" Type="Self.Client" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Gender">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Client">
-              <PropertyRef Name="IDGender" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__Employee__IDDepa__44FF419A">
           <End Role="Department" Type="Self.Department" Multiplicity="1" />
           <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
@@ -650,7 +618,6 @@
         <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ApplicationDepartment" EntityType="Self.ApplicationDepartment" />
           <EntitySet Name="ApplicationTag" EntityType="Self.ApplicationTag" />
-          <EntitySet Name="Client" EntityType="Self.Client" />
           <EntitySet Name="Department" EntityType="Self.Department" />
           <EntitySet Name="Employee" EntityType="Self.Employee" />
           <EntitySet Name="Gender" EntityType="Self.Gender" />
@@ -672,10 +639,6 @@
           <AssociationSet Name="FK__Applicati__IDTag__5FB337D6" Association="Self.FK__Applicati__IDTag__5FB337D6">
             <End Role="Tag" EntitySet="Tag" />
             <End Role="ApplicationTag" EntitySet="ApplicationTag" />
-          </AssociationSet>
-          <AssociationSet Name="FK__Client__IDGender__4BAC3F29" Association="Self.FK__Client__IDGender__4BAC3F29">
-            <End Role="Gender" EntitySet="Gender" />
-            <End Role="Client" EntitySet="Client" />
           </AssociationSet>
           <AssociationSet Name="FK__Employee__IDDepa__44FF419A" Association="Self.FK__Employee__IDDepa__44FF419A">
             <End Role="Department" EntitySet="Department" />
@@ -699,10 +662,6 @@
             <End Role="ForAdmin" EntitySet="ForAdmin" />
           </AssociationSet>
           <EntitySet Name="Order" EntityType="TechnicalSupportSDModel.Order" />
-          <AssociationSet Name="FK_Order_Client" Association="TechnicalSupportSDModel.FK_Order_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Order" EntitySet="Order" />
-          </AssociationSet>
           <EntitySet Name="Application" EntityType="TechnicalSupportSDModel.Application" />
           <AssociationSet Name="FK__Applicati__IDApp__5535A963" Association="TechnicalSupportSDModel.FK__Applicati__IDApp__5535A963">
             <End Role="Application" EntitySet="Application" />
@@ -712,16 +671,12 @@
             <End Role="Application" EntitySet="Application" />
             <End Role="ApplicationTag" EntitySet="ApplicationTag" />
           </AssociationSet>
-          <AssociationSet Name="FK__Applicati__IDCli__5070F446" Association="TechnicalSupportSDModel.FK__Applicati__IDCli__5070F446">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Application" EntitySet="Application" />
-          </AssociationSet>
           <FunctionImport Name="func_TrueWork" IsComposable="true" ReturnType="Collection(TechnicalSupportSDModel.func_TrueWork_Result)" />
           <FunctionImport Name="pr_AppInf" ReturnType="Collection(TechnicalSupportSDModel.pr_AppInf_Result)">
-            <Parameter Name="ID" Mode="In" Type="Int32" />
+          <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pr_LastTag" ReturnType="Collection(TechnicalSupportSDModel.pr_LastTag_Result)">
-            <Parameter Name="AID" Mode="In" Type="Int32" />
+          <Parameter Name="AID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pr_TagPop" ReturnType="Collection(TechnicalSupportSDModel.pr_TagPop_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -754,6 +709,19 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <EntitySet Name="Client" EntityType="TechnicalSupportSDModel.Client" />
+          <AssociationSet Name="FK__Applicati__IDCli__5070F446" Association="TechnicalSupportSDModel.FK__Applicati__IDCli__5070F446">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Application" EntitySet="Application" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Client__IDGender__4BAC3F29" Association="TechnicalSupportSDModel.FK__Client__IDGender__4BAC3F29">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Client" Association="TechnicalSupportSDModel.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ForAdmin">
           <Key>
@@ -762,7 +730,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDEmployee" Type="Int32" Nullable="false" />
           <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Text" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsDone" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Employee" Relationship="TechnicalSupportSDModel.FK_ForAdmin_Employee" FromRole="ForAdmin" ToRole="Employee" />
         </EntityType>
@@ -787,18 +755,6 @@
           <Property Name="TotalCost" Type="Decimal" Nullable="false" Precision="8" Scale="2" />
           <NavigationProperty Name="Client" Relationship="TechnicalSupportSDModel.FK_Order_Client" FromRole="Order" ToRole="Client" />
         </EntityType>
-        <Association Name="FK_Order_Client">
-          <End Type="TechnicalSupportSDModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="TechnicalSupportSDModel.Order" Role="Order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Order">
-              <PropertyRef Name="IDClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Application">
           <Key>
             <PropertyRef Name="ID" />
@@ -837,18 +793,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Applicati__IDCli__5070F446">
-          <End Type="TechnicalSupportSDModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="TechnicalSupportSDModel.Application" Role="Application" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Client">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Application">
-              <PropertyRef Name="IDClient" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="func_TrueWork_Result">
           <Property Type="String" Name="Должность" Nullable="false" MaxLength="100" />
           <Property Type="Int32" Name="Кол_во_запросов" Nullable="true" />
@@ -883,6 +827,60 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDGender" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronimic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Unreliable" Type="Boolean" Nullable="false" />
+          <Property Name="WhyUnr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="TechnicalSupportSDModel.FK__Applicati__IDCli__5070F446" FromRole="Client" ToRole="Application" />
+          <NavigationProperty Name="Gender" Relationship="TechnicalSupportSDModel.FK__Client__IDGender__4BAC3F29" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="Order" Relationship="TechnicalSupportSDModel.FK_Order_Client" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <Association Name="FK__Applicati__IDCli__5070F446">
+          <End Type="TechnicalSupportSDModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="TechnicalSupportSDModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Client__IDGender__4BAC3F29">
+          <End Type="TechnicalSupportSDModel.Gender" Role="Gender" Multiplicity="1" />
+          <End Type="TechnicalSupportSDModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="IDGender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Client">
+          <End Type="TechnicalSupportSDModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="TechnicalSupportSDModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="IDClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -909,23 +907,6 @@
                 <ScalarProperty Name="IDTag" ColumnName="IDTag" />
                 <ScalarProperty Name="IDEmployee" ColumnName="IDEmployee" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="TechnicalSupportSDModel.Client">
-              <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="WhyUnr" ColumnName="WhyUnr" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Patronimic" ColumnName="Patronimic" />
-                <ScalarProperty Name="Phone" ColumnName="Phone" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Unreliable" ColumnName="Unreliable" />
-                <ScalarProperty Name="Avatar" ColumnName="Avatar" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1086,6 +1067,22 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище TechnicalSupportSDModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище TechnicalSupportSDModel.sp_upgraddiagrams" />
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="TechnicalSupportSDModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="WhyUnr" ColumnName="WhyUnr" />
+                <ScalarProperty Name="Unreliable" ColumnName="Unreliable" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Patronimic" ColumnName="Patronimic" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IDGender" ColumnName="IDGender" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

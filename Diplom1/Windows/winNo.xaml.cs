@@ -41,7 +41,7 @@ namespace Diplom1.Windows
             lb_FIO.Content = Clt.LastName + " " + Clt.FirstName + " " + Clt.Patronimic;
             lb_Ord.Content = "Заказов: " +cltOrdCnt;
             lb_Sum.Content = "Общая сумма: " + sum;
-            lb_Dec.Content = "Откланенных запросов: " + Context.Application.ToList().Where(i => i.IDClient == Clt.ID && i.IsDone == true &&
+            lb_Dec.Content = "Отклоненных запросов: " + Context.Application.ToList().Where(i => i.IDClient == Clt.ID && i.IsDone == true &&
                                                                 (Context.ApplicationTag.ToList().Where(j => j.IDApplication == i.ID).Count() == 0)).Count();
 
         }
@@ -75,7 +75,6 @@ namespace Diplom1.Windows
                 ct.Email = Clt.Email;
                 ct.Birthday = Clt.Birthday;
                 ct.Unreliable = true;               //!
-                ct.Avatar = Clt.Avatar;
                 ct.WhyUnr = Clt.WhyUnr;
 
                 Context.Client.AddOrUpdate(ct);

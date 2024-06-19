@@ -24,9 +24,6 @@ namespace Diplom1.Windows
         public winChos()
         {
             InitializeComponent();
-
-            Context = new Entities();
-
             dgl.ItemsSource = Context.Application.ToList();
         }
         public void RemoveText(object sender, EventArgs e)
@@ -198,6 +195,10 @@ namespace Diplom1.Windows
         {
             if (cbxGd.IsChecked == true)
             {
+                cbxDc.IsChecked = false;
+                cbxNm.IsChecked = false;
+                cbxNl.IsChecked = false;
+
                 dgl.ItemsSource = Context.Application.ToList().Where(i => i.IsDone == true && (Context.ApplicationTag.ToList().Where(
                                                              j => j.IDApplication == i.ID).Count() != 0) &&
                                                              Context.Client.ToList().Where(k => k.ID == i.IDClient).FirstOrDefault().Unreliable == false);
@@ -207,28 +208,36 @@ namespace Diplom1.Windows
 
         private void cbxNm_Click(object sender, RoutedEventArgs e)
         {
+            cbxDc.IsChecked = false;
+            cbxGd.IsChecked = false;
+            cbxNl.IsChecked = false;
             if (cbxNm.IsChecked == true)
             {
                 dgl.ItemsSource = Context.Application.ToList().Where(i => i.IsDone == false && (Context.ApplicationTag.ToList().Where(
-                                                             j => j.IDApplication == i.ID).Count() != 0) &&
-                                                             Context.Client.ToList().Where(k => k.ID == i.IDClient).FirstOrDefault().Unreliable == false);
+                                                             j => j.IDApplication == i.ID).Count() != 0));
             }
             else dgl.ItemsSource = Context.Application.ToList();
         }
 
         private void cbxDc_Click(object sender, RoutedEventArgs e)
         {
-                if (cbxDc.IsChecked == true)
+            cbxGd.IsChecked = false;
+            cbxNm.IsChecked = false;
+            cbxNl.IsChecked = false;
+            if (cbxDc.IsChecked == true)
                 {
-                    dgl.ItemsSource = Context.Application.ToList().Where(i => i.IsDone == true && (Context.ApplicationTag.ToList().Where(
-                                                             j => j.IDApplication == i.ID).Count() == 0) ||
-                                                             Context.Client.ToList().Where(k => k.ID == i.IDClient).FirstOrDefault().Unreliable == true);
+                dgl.ItemsSource = Context.Application.ToList().Where(i => i.IsDone == true && (Context.ApplicationTag.ToList().Where(
+                                                         j => j.IDApplication == i.ID).Count() == 0));
             }
             else dgl.ItemsSource = Context.Application.ToList();
         }
 
         private void cbxNl_Click(object sender, RoutedEventArgs e)
         {
+            cbxDc.IsChecked = false;
+            cbxNm.IsChecked = false;
+            cbxGd.IsChecked = false;
+
             if (cbxNl.IsChecked == true)
             {
                 dgl.ItemsSource = Context.Application.ToList().Where(i => i.IsDone == false && (Context.ApplicationTag.ToList().Where(

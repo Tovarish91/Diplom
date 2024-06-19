@@ -29,7 +29,6 @@ namespace Diplom1.DB
     
         public virtual DbSet<ApplicationDepartment> ApplicationDepartment { get; set; }
         public virtual DbSet<ApplicationTag> ApplicationTag { get; set; }
-        public virtual DbSet<Client> Client { get; set; }
         public virtual DbSet<Department> Department { get; set; }
         public virtual DbSet<Employee> Employee { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
@@ -39,6 +38,7 @@ namespace Diplom1.DB
         public virtual DbSet<ForAdmin> ForAdmin { get; set; }
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<Application> Application { get; set; }
+        public virtual DbSet<Client> Client { get; set; }
     
         [DbFunction("Entities", "func_TrueWork")]
         public virtual IQueryable<func_TrueWork_Result> func_TrueWork()

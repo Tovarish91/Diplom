@@ -4,10 +4,9 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="4b0bc79109c34726bc2eff43a187de9a" Name="Diagram1">
+      <Diagram DiagramId="4b0bc79109c34726bc2eff43a187de9a" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="TechnicalSupportSDModel.ApplicationDepartment" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.ApplicationTag" Width="1.5" PointX="8.25" PointY="12.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TechnicalSupportSDModel.Client" Width="1.5" PointX="1.5" PointY="10.375" IsExpanded="true" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.Department" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.Employee" Width="1.5" PointX="6" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.Gender" Width="1.5" PointX="1.5" PointY="18.25" IsExpanded="true" />
@@ -18,7 +17,6 @@
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDEmp__571DF1D5" ManuallyRouted="false" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDEmp__60A75C0F" ManuallyRouted="false" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDTag__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="TechnicalSupportSDModel.FK__Client__IDGender__4BAC3F29" ManuallyRouted="false" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Employee__IDDepa__44FF419A" ManuallyRouted="false" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Tag__IDDepartmen__5BE2A6F2" ManuallyRouted="false" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Employee__IDGend__4316F928" ManuallyRouted="false" />
@@ -26,11 +24,13 @@
         <EntityTypeShape EntityType="TechnicalSupportSDModel.ForAdmin" Width="1.5" PointX="8.25" PointY="6.125" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK_ForAdmin_Employee" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.Order" Width="1.5" PointX="3.75" PointY="11.25" />
-        <AssociationConnector Association="TechnicalSupportSDModel.FK_Order_Client" />
         <EntityTypeShape EntityType="TechnicalSupportSDModel.Application" Width="1.5" PointX="3.75" PointY="17.75" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDApp__5535A963" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDApp__5EBF139D" />
+        <EntityTypeShape EntityType="TechnicalSupportSDModel.Client" Width="1.5" PointX="3.75" PointY="21.375" />
         <AssociationConnector Association="TechnicalSupportSDModel.FK__Applicati__IDCli__5070F446" />
+        <AssociationConnector Association="TechnicalSupportSDModel.FK__Client__IDGender__4BAC3F29" />
+        <AssociationConnector Association="TechnicalSupportSDModel.FK_Order_Client" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

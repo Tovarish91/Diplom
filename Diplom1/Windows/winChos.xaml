@@ -27,7 +27,7 @@
         <!--Выход-->
         <Button Template="{DynamicResource ButtonTemplate1}" 
                 x:Name="btnClose"
-                Content="Выйти"
+                Content="Выход"
                 FontSize="24"
                 Background="#FFC229"
                 BorderBrush="#FFC229"
@@ -55,7 +55,7 @@
             <CheckBox x:Name="cbxGd"
                 VerticalAlignment="Center"  
                               Click="cbxGd_Click"
-                      Margin="0 5 0 15"></CheckBox>
+                      Margin="0 5 0 15" ></CheckBox>
 
                 <CheckBox x:Name="cbxNm"
                 VerticalAlignment="Center" Click="cbxNm_Click" ></CheckBox>
@@ -105,7 +105,8 @@
                   SelectionChanged="dgl_SelectionChanged"
                   FontSize="16"
                   IsReadOnly="true"
-                  Background="#FFD772" LoadingRow="dgl_LoadingRow">
+                  Background="#FFD772" 
+                  LoadingRow="dgl_LoadingRow">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Идентификатор" Binding="{Binding Path=ID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=Client.LastName}"></DataGridTextColumn>

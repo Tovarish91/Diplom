@@ -17,8 +17,8 @@ namespace Diplom1.DB
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Client()
         {
-            this.Order = new HashSet<Order>();
             this.Application = new HashSet<Application>();
+            this.Order = new HashSet<Order>();
         }
     
         public int ID { get; set; }
@@ -30,13 +30,12 @@ namespace Diplom1.DB
         public string Email { get; set; }
         public System.DateTime Birthday { get; set; }
         public bool Unreliable { get; set; }
-        public byte[] Avatar { get; set; }
         public string WhyUnr { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Application> Application { get; set; }
         public virtual Gender Gender { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Application> Application { get; set; }
     }
 }

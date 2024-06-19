@@ -79,6 +79,7 @@ namespace Diplom1.Windows
                     anyVote = false;
                 }
             }
+            else MessageBox.Show("Введите отредактированный запрос", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
         public void RemoveText(object sender, EventArgs e)
